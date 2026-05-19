@@ -573,17 +573,17 @@
         activeCharts.market = new Chart(ctx, {
             type:'line',
             data:{
-                labels:['Map 1 Start','Map 1 End','T2-27 min','Map 2 Start'],
+                labels:['Map 1 Status','Map 2 Opening','Pre-Match (T-27m)','Map 2 Start'],
                 datasets:[{
                     label:'Kill Line',
-                    data:[12.5,12.5,13.5,12.5],
+                    data:[12.5, 13.5, 13.5, 12.5],
                     borderColor:'#dc2626',
                     backgroundColor:'rgba(220,38,38,0.05)',
                     fill:true, tension:0, borderWidth:4,
-                    pointBackgroundColor: ctx => ctx.dataIndex===2 ? '#c9a84c' : '#dc2626',
-                    pointRadius: ctx => ctx.dataIndex===2 ? 10 : 6,
-                    pointBorderColor: ctx => ctx.dataIndex===2 ? '#fff' : '#dc2626',
-                    pointBorderWidth: ctx => ctx.dataIndex===2 ? 3 : 1,
+                    pointBackgroundColor: ctx => ctx.dataIndex===3 ? '#c9a84c' : '#dc2626',
+                    pointRadius: ctx => ctx.dataIndex===3 ? 10 : 6,
+                    pointBorderColor: ctx => ctx.dataIndex===3 ? '#fff' : '#dc2626',
+                    pointBorderWidth: ctx => ctx.dataIndex===3 ? 3 : 1,
                 }]
             },
             options:{
