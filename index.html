@@ -526,12 +526,12 @@
     ];
 
     const marketRows = [
-        { match:'17(1)', fluctuation:'13.5',               time:'No Fluctuations',  map:'Dust2 (#2)',    kills:16, team:'Team Liquid #13',  flagged:false },
+        { match:'17(1)', fluctuation:'13.5',               time:'Stable',           map:'Dust2 (#2)',    kills:16, team:'Team Liquid #13',  flagged:false },
         { match:'17(2)', fluctuation:'12.5 - 13.5 - 12.5', time:'Before start game', map:'Nuke (#3)',     kills:8,  team:'Team Liquid #13',  flagged:true },
         { match:'17(3)', fluctuation:'12.5 - 13.5 - 12.5', time:'Before start map3', map:'Inferno (#5)',  kills:10, team:'Team Liquid #13',  flagged:true },
-        { match:'20(1)', fluctuation:'13.5',               time:'No Fluctuations',  map:'Nuke (#3)',     kills:6,  team:'Legacy #25',       flagged:false },
-        { match:'20(2)', fluctuation:'13.5',               time:'No Fluctuations',  map:'Dust2 (#2)',    kills:20, team:'Legacy #25',       flagged:false },
-        { match:'20(3)', fluctuation:'13.5',               time:'No Fluctuations',  map:'Inferno (#5)',  kills:19, team:'Legacy #25',       flagged:false },
+        { match:'20(1)', fluctuation:'13.5',               time:'Stable',           map:'Nuke (#3)',     kills:6,  team:'Legacy #25',       flagged:false },
+        { match:'20(2)', fluctuation:'13.5',               time:'Stable',           map:'Dust2 (#2)',    kills:20, team:'Legacy #25',       flagged:false },
+        { match:'20(3)', fluctuation:'13.5',               time:'Stable',           map:'Inferno (#5)',  kills:19, team:'Legacy #25',       flagged:false },
     ];
 
     let activeCharts = { market:null, perf:null };
@@ -573,22 +573,25 @@
         activeCharts.market = new Chart(ctx, {
             type:'line',
             data:{
-                labels:['Map 1 Status','Map 2 Opening','Pre-Match (T-27m)','Map 2 Start'],
+                labels:['Opening (T-60m)','Volatility 1','Volatility 2 (T-27m)','Final Pre-Series'],
                 datasets:[{
-                    label:'Kill Line',
+                    label:'Map 2 Kill Line',
                     data:[12.5, 13.5, 13.5, 12.5],
                     borderColor:'#dc2626',
                     backgroundColor:'rgba(220,38,38,0.05)',
                     fill:true, tension:0, borderWidth:4,
-                    pointBackgroundColor: ctx => ctx.dataIndex===3 ? '#c9a84c' : '#dc2626',
-                    pointRadius: ctx => ctx.dataIndex===3 ? 10 : 6,
-                    pointBorderColor: ctx => ctx.dataIndex===3 ? '#fff' : '#dc2626',
-                    pointBorderWidth: ctx => ctx.dataIndex===3 ? 3 : 1,
+                    pointBackgroundColor: ctx => (ctx.dataIndex===1 || ctx.dataIndex===3) ? '#dc2626' : '#c9a84c',
+                    pointRadius: 8,
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
                 }]
             },
             options:{
                 responsive:true, maintainAspectRatio:false,
-                plugins:{ legend:{display:false}, tooltip:{backgroundColor:'#1e3a5f', callbacks:{label: c=>' Kill Line: '+c.parsed.y}} },
+                plugins:{ 
+                    legend:{display:false}, 
+                    tooltip:{backgroundColor:'#1e3a5f', callbacks:{label: c=>' Map 2 Line: '+c.parsed.y}} 
+                },
                 scales:{
                     y:{min:10,max:15,grid:{color:'#f1f5f9'},ticks:{color:'#94a3b8'}},
                     x:{grid:{display:false},ticks:{color:'#94a3b8'}}
