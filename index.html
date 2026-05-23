@@ -35,7 +35,7 @@
         .profile-player-card > div:first-child { display:none; }
         .no-scrollbar::-webkit-scrollbar { display:none; }
         .no-scrollbar { -ms-overflow-style:none; scrollbar-width:none; }
-        .tournament-table th { background:#1e3a5f; color:#c9a84c; font-size:11px; text-transform:uppercase; letter-spacing:0.1em; padding:14px 32px; }
+        .tournament-table th { background:#1e3a5f; color:#c9a84c; font-size:13px; text-transform:uppercase; letter-spacing:0.1em; padding:14px 32px; }
         .tournament-table tr.flagged td { background:#fef2f2; color:#dc2626; font-weight:700; }
         .im-logo { font-weight:800; color:#c9a84c; letter-spacing:-0.5px; }
         @keyframes loading { 0%{transform:translateX(-100%)} 100%{transform:translateX(300%)} }
@@ -49,7 +49,7 @@
         .perf-tab-active { background:#1e3a5f !important; color:#fff !important; border-color:#1e3a5f !important; }
     </style>
 </head>
-<body class="bg-sentinel text-slate-800 font-sans h-screen flex flex-col md:flex-row overflow-hidden">
+<body class="bg-slate-100 text-slate-900 font-sans h-screen flex flex-col md:flex-row overflow-hidden">
 
 <!-- ═══ SIDEBAR ═══ -->
 <aside id="sidebar" class="w-full md:w-72 bg-white border-r border-slate-200 flex flex-col z-40 flex-shrink-0" style="transition:min-width 0.3s ease,width 0.3s ease,opacity 0.3s ease;">
@@ -63,7 +63,7 @@
                 <i class="fa-solid fa-chevron-left"></i>
             </button>
         </div>
-        <div class="text-[10px] text-white/40 font-bold uppercase tracking-widest">Case ID: 093-X</div>
+        <div class="text-xs text-white/70 font-bold uppercase tracking-widest">Case ID: 093-X</div>
     </div>
 
     <nav class="flex-1 p-4 space-y-2 overflow-y-auto no-scrollbar">
@@ -85,14 +85,14 @@
     </nav>
 
     <div class="p-6 border-t border-slate-100 bg-slate-50">
-        <div class="text-[10px] text-slate-400 font-mono uppercase tracking-widest mb-1">Powered by</div>
+        <div class="text-sm text-slate-500 font-mono uppercase tracking-widest mb-1">Powered by</div>
         <div class="im-logo text-lg uppercase">Integrity Mentors</div>
     </div>
 </aside>
 
 <main class="flex-1 overflow-y-auto no-scrollbar relative">
 
-<div id="sidebar-topbar" style="display:none;position:sticky;top:0;left:0;z-index:100;height:52px;background:#f8fafc;border-bottom:1px solid rgba(226,232,240,0.9);padding:0 16px;align-items:center;flex-shrink:0;">
+<div id="sidebar-topbar" style="display:none;position:sticky;top:0;left:0;z-index:100;height:52px;background:#f1f5f9;border-bottom:1px solid rgba(203,213,225,0.9);padding:0 16px;align-items:center;flex-shrink:0;">
     <button onclick="toggleSidebar()" title="Show panel" style="background:#1e3a5f;color:#c9a84c;border:none;padding:8px 14px;border-radius:10px;cursor:pointer;font-size:15px;box-shadow:0 4px 16px rgba(30,58,95,0.35);">
         <i class="fa-solid fa-bars"></i>
     </button>
@@ -216,9 +216,9 @@
         </div>
 
         <div class="mb-12">
-            <div class="p-8 rounded-[2.5rem] mb-6" style="background:#f8fafc;">
+            <div class="p-8 rounded-[2.5rem] mb-6" style="background:#f1f5f9;">
                 <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-xs font-bold text-slate-600 uppercase tracking-widest">BODYY's Kill Line Drift</h3>
+                    <h3 class="text-xs font-bold text-slate-600 uppercase tracking-widest">PLAYER Y's Kill Line Drift</h3>
                     <div class="text-[10px] font-mono text-anomaly font-bold border border-anomaly/20 bg-red-50 px-3 py-1 rounded-full">MAP 2 (NUKE)</div>
                 </div>
                 <div class="chart-container" style="height:400px;"><canvas id="marketChart"></canvas></div>
@@ -395,7 +395,7 @@
         <div class="bg-white rounded-[2.5rem] border border-slate-200 shadow-sm overflow-hidden mt-8">
             <div class="p-8 bg-brand flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h4 class="text-gold font-bold text-lg leading-none mb-2">BODYY's Performance &amp; Odds History</h4>
+                    <h4 class="text-gold font-bold text-lg leading-none mb-2">PLAYER Y's Performance &amp; Odds History</h4>
                     <p class="text-white/40 text-[10px] font-mono uppercase tracking-[0.2em]">CS Asia Championships 2025</p>
                 </div>
             </div>
@@ -707,6 +707,28 @@
                     </div>
                 </div>
 
+                <!-- Video 4 -->
+                <div class="glass-card rounded-2xl overflow-hidden shadow-sm">
+                    <div style="background:#0a0e17;" class="aspect-video relative">
+                        <iframe class="w-full h-full absolute inset-0" src="ADD_YOUTUBE_LINK_4_HERE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-4 border-t border-slate-100">
+                        <div id="desc-4" class="text-[13px] font-mono text-slate-500 desc-clamp">ADD DESCRIPTION 4 HERE</div>
+                        <button onclick="toggleDesc('desc-4', this)" class="text-[11px] font-bold text-brand mt-2 hover:underline cursor-pointer">Read more</button>
+                    </div>
+                </div>
+
+                <!-- Video 5 -->
+                <div class="glass-card rounded-2xl overflow-hidden shadow-sm">
+                    <div style="background:#0a0e17;" class="aspect-video relative">
+                        <iframe class="w-full h-full absolute inset-0" src="ADD_YOUTUBE_LINK_5_HERE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-4 border-t border-slate-100">
+                        <div id="desc-5" class="text-[13px] font-mono text-slate-500 desc-clamp">ADD DESCRIPTION 5 HERE</div>
+                        <button onclick="toggleDesc('desc-5', this)" class="text-[11px] font-bold text-brand mt-2 hover:underline cursor-pointer">Read more</button>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -796,7 +818,7 @@
                 <td class="px-8 py-4 text-slate-500 font-mono">${row.time}</td>
                 <td class="px-8 py-4 text-slate-500 font-mono italic">${row.map}</td>
                 <td class="px-8 py-4 text-right font-black text-lg">${row.kills}</td>
-                <td class="px-8 py-4 text-slate-500 font-mono">${row.team}</td>
+                <td class="px-8 py-4 text-slate-500 font-mono" style="filter:blur(6px);user-select:none;">${row.team}</td>
             `;
             tbody.appendChild(tr);
         });
