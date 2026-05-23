@@ -6,7 +6,7 @@
     <title>MAP | Integrity Dossier</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script>
@@ -41,6 +41,12 @@
         @keyframes loading { 0%{transform:translateX(-100%)} 100%{transform:translateX(300%)} }
         @keyframes fade-in { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
         .animate-fade-in { animation:fade-in 0.5s ease-out forwards; }
+        * { font-family: 'Outfit', sans-serif !important; }
+        .fa-solid, .fa-regular, .fa-brands, .fa-light, .fa-thin { font-family: 'Font Awesome 6 Free' !important; }
+        .desc-clamp { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+        .perf-tab { background:transparent; color:#64748b; border-color:#e2e8f0; cursor:pointer; }
+        .perf-tab:hover { background:#f1f5f9; }
+        .perf-tab-active { background:#1e3a5f !important; color:#fff !important; border-color:#1e3a5f !important; }
     </style>
 </head>
 <body class="bg-sentinel text-slate-800 font-sans h-screen flex flex-col md:flex-row overflow-hidden">
@@ -52,13 +58,12 @@
         <div class="flex items-center justify-between text-white mb-1">
             <div class="flex items-center space-x-2">
                 <span class="text-2xl font-black tracking-tighter">Multilayer Analysis Platform</span>
-                <!-- <span class="text-[10px] bg-white/10 border border-white/20 text-white/80 px-2 py-0.5 rounded font-mono font-bold">INTEL</span> -->
             </div>
             <button onclick="toggleSidebar()" title="Hide panel" style="background:rgba(255,255,255,0.1);border:none;color:rgba(255,255,255,0.7);padding:6px 10px;border-radius:8px;cursor:pointer;font-size:14px;">
                 <i class="fa-solid fa-chevron-left"></i>
             </button>
         </div>
-        <div class="text-[10px] text-white/40 font-bold uppercase tracking-widest">Case ID: 092-X</div>
+        <div class="text-[10px] text-white/40 font-bold uppercase tracking-widest">Case ID: 093-X</div>
     </div>
 
     <nav class="flex-1 p-4 space-y-2 overflow-y-auto no-scrollbar">
@@ -75,7 +80,7 @@
             <i class="fa-solid fa-satellite-dish mr-3 opacity-70"></i> Intel
         </button>
         <button onclick="navigate('vault')" id="btn-vault" class="nav-link w-full flex items-center px-4 py-3 text-sm font-semibold text-slate-500 hover:bg-slate-50 rounded-xl transition-all">
-            <i class="fa-solid fa-vault mr-3 opacity-70"></i> Action Analysis
+            <i class="fa-solid fa-clapperboard mr-3 opacity-70"></i> Action Analysis
         </button>
     </nav>
 
@@ -85,100 +90,115 @@
     </div>
 </aside>
 
-<button id="sidebar-show-btn" onclick="toggleSidebar()" title="Show panel" style="display:none;position:fixed;left:16px;top:16px;z-index:9999;background:#1e3a5f;color:#c9a84c;border:none;padding:10px 14px;border-radius:12px;cursor:pointer;font-size:16px;box-shadow:0 4px 20px rgba(30,58,95,0.4);">
-    <i class="fa-solid fa-bars"></i>
-</button>
-
 <main class="flex-1 overflow-y-auto no-scrollbar relative">
 
-<!-- ═══════════════════════════════ PLAYER PROFILE ═══════════════════════════════ -->
-<section id="view-profile" class="view block p-6 md:p-12 space-y-10 animate-fade-in">
-    <div class="max-w-5xl mx-auto">
+<div id="sidebar-topbar" style="display:none;position:sticky;top:0;left:0;z-index:100;height:52px;background:#f8fafc;border-bottom:1px solid rgba(226,232,240,0.9);padding:0 16px;align-items:center;flex-shrink:0;">
+    <button onclick="toggleSidebar()" title="Show panel" style="background:#1e3a5f;color:#c9a84c;border:none;padding:8px 14px;border-radius:10px;cursor:pointer;font-size:15px;box-shadow:0 4px 16px rgba(30,58,95,0.35);">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+</div>
 
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+<!-- ═══════════════════════════════ PLAYER PROFILE ═══════════════════════════════ -->
+<section id="view-profile" class="view block p-8 md:p-14 animate-fade-in">
+    <div class="flex flex-col gap-10">
+
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div class="space-y-3">
-                <div class="inline-flex items-center px-3 py-1 bg-brand/5 border border-brand/10 rounded-full text-[10px] font-black text-brand tracking-widest uppercase">
-                    Status: Integrity Monitoring Indicators
-                </div>
-                <h1 class="text-5xl font-extrabold text-brand tracking-tight leading-none">Player Profile<br><span class="text-slate-400"> </span></h1>
+                <h1 class="text-6xl md:text-7xl font-extrabold text-brand tracking-tight leading-none">Player Profile</h1>
+                <p class="text-slate-400 text-2xl font-semibold tracking-wide">CS Asia Championships 2025</p>
             </div>
-            <div class="profile-player-card glass-card p-6 rounded-3xl shadow-sm border-l-4 border-gold flex items-center space-x-6 min-w-[320px]">
-                <div class="w-14 h-14 bg-slate-100 rounded-full flex items-center justify-center text-3xl">👤</div>
+            <div class="profile-player-card glass-card p-8 rounded-3xl shadow-sm border-l-4 border-gold flex items-center space-x-6" style="min-width:360px;">
                 <div class="w-20 h-24 bg-slate-100 rounded-2xl overflow-hidden flex-shrink-0 shadow-sm border border-slate-200">
                     <img src="assets/images/X.jpeg" alt="bodyy" class="w-full h-full object-cover object-top">
                 </div>
                 <div>
-                    <div class="text-xl font-bold text-brand">Alexandre 'bodyy' Pianaro</div>
-                    <div class="text-xs text-slate-400 font-mono uppercase">Pos: IGL/Rifler • Team: 3DMAX</div>
+                    <div class="text-2xl font-bold text-brand">Player Y</div>
+                    <div class="text-sm text-slate-400 font-mono uppercase mt-1">Pos 2/5 • Tier 1 Rank #13</div>
                 </div>
             </div>
         </div>
 
-        <!-- Tournament Background -->
-        <div class="glass-card rounded-[2.5rem] overflow-hidden shadow-sm mb-8">
-            <div style="background:linear-gradient(135deg,#1e3a5f 0%,#0f2340 100%);" class="px-8 py-5 flex items-center justify-between">
-                <div>
-                    <div class="text-[10px] font-bold uppercase tracking-widest mb-1" style="color:rgba(255,255,255,0.45);">Tournament</div>
-                    <div class="text-white font-black text-base uppercase tracking-wide">ESL Pro League / Starladder Context</div>
+        <!-- Tournament Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="glass-card rounded-3xl border border-blue-100 flex flex-col overflow-hidden shadow-sm">
+                <div class="h-2 flex-shrink-0" style="background:linear-gradient(90deg,#1e3a5f,#0f2340);"></div>
+                <div class="p-10 flex-1 flex flex-col justify-between">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="text-brand text-4xl"><i class="fa-solid fa-trophy"></i></div>
+                        <span style="background:#eff6ff;color:#1e3a5f;font-size:12px;font-weight:900;padding:5px 14px;border-radius:99px;">MATCH 17</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-brand mb-2">Competition</h3>
+                        <p class="text-base text-slate-400">CS Asia Championships 2025 · Best of 3</p>
+                    </div>
                 </div>
-                <span style="background:rgba(201,168,76,0.2);color:#c9a84c;border:1px solid rgba(201,168,76,0.4);font-size:10px;font-weight:900;padding:5px 16px;border-radius:99px;">MONITORED MATCH</span>
             </div>
-            <div class="p-8 grid grid-cols-1 md:grid-cols-3 gap-5">
-                <div style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:20px;" class="p-5">
-                    <div class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-2">Competition</div>
-                    <div class="text-sm font-black text-brand">Professional Match</div>
-                    <div class="text-[10px] font-mono text-slate-400 mt-1">3DMAX Performance Analysis</div>
+            <div class="glass-card rounded-3xl border border-amber-100 flex flex-col overflow-hidden shadow-sm">
+                <div class="h-2 flex-shrink-0" style="background:linear-gradient(90deg,#c9a84c,#9a7a2c);"></div>
+                <div class="p-10 flex-1 flex flex-col justify-between">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="text-gold text-4xl"><i class="fa-solid fa-flag"></i></div>
+                        <span style="background:#fef9ee;color:#c9a84c;border:1px solid rgba(201,168,76,0.4);font-size:12px;font-weight:900;padding:5px 14px;border-radius:99px;">MAP 2</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-brand mb-2">Flagged Match</h3>
+                        <p class="text-base text-slate-400">Map 2 (Nuke) · Kill Line Drift</p>
+                    </div>
                 </div>
-                <div style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:20px;" class="p-5">
-                    <div class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-2">Flagged Match</div>
-                    <div class="text-sm font-black text-brand">Map 2 (Nuke)</div>
-                    <div class="text-[10px] font-mono text-slate-400 mt-1">Kill Line Drift: 13.5 → 12.5</div>
-                </div>
-                <div style="background:#fef2f2;border:1.5px solid #fecaca;border-radius:20px;" class="p-5">
-                    <div class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-2">Match Outcome</div>
-                    <div class="text-sm font-black text-anomaly">Performance Inversion</div>
-                    <div class="text-[10px] font-mono text-slate-400 mt-1"> </div>
+            </div>
+            <div class="glass-card rounded-3xl border border-red-100 flex flex-col overflow-hidden shadow-sm">
+                <div class="h-2 flex-shrink-0" style="background:linear-gradient(90deg,#dc2626,#991b1b);"></div>
+                <div class="p-10 flex-1 flex flex-col justify-between">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="text-anomaly text-4xl"><i class="fa-solid fa-circle-xmark"></i></div>
+                        <span style="background:#fef2f2;color:#dc2626;font-size:12px;font-weight:900;padding:5px 14px;border-radius:99px;">2-1</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-brand mb-2">Match Outcome</h3>
+                        <p class="text-base text-slate-400">Series Result 2-1 · 3DMAX Won</p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- 3 summary cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
-            <div class="glass-card rounded-2xl border border-red-100 flex flex-col overflow-hidden shadow-sm">
-                <div class="h-1.5 flex-shrink-0" style="background:linear-gradient(90deg,#dc2626,#991b1b);"></div>
-                <div class="p-6 flex-1 flex flex-col justify-between">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="text-anomaly text-2xl"><i class="fa-solid fa-scale-unbalanced"></i></div>
-                        <span style="background:#fef2f2;color:#dc2626;font-size:10px;font-weight:900;padding:3px 10px;border-radius:99px;">−1.0 pts</span>
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="glass-card rounded-3xl border border-blue-100 flex flex-col overflow-hidden shadow-sm">
+                <div class="h-2 flex-shrink-0" style="background:linear-gradient(90deg,#1e3a5f,#0f2340);"></div>
+                <div class="p-10 flex-1 flex flex-col justify-between">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="text-brand text-4xl"><i class="fa-solid fa-scale-unbalanced"></i></div>
+                        <span style="background:#eff6ff;color:#1e3a5f;font-size:12px;font-weight:900;padding:5px 14px;border-radius:99px;">−1.0 pts</span>
                     </div>
                     <div>
-                        <h3 class="font-bold text-brand mb-1">Odds movement</h3>
-                        <p class="text-xs text-slate-400">13.5 → 12.5 drop 27 min before Map 2</p>
+                        <h3 class="text-xl font-bold text-brand mb-2">Odds Movement</h3>
+                        <p class="text-base text-slate-400">13.5 → 12.5 drop 27 min before Map 2</p>
                     </div>
                 </div>
             </div>
-            <div class="glass-card rounded-2xl border border-amber-100 flex flex-col overflow-hidden shadow-sm">
-                <div class="h-1.5 flex-shrink-0" style="background:linear-gradient(90deg,#c9a84c,#9a7a2c);"></div>
-                <div class="p-6 flex-1 flex flex-col justify-between">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="text-gold text-2xl"><i class="fa-solid fa-rotate"></i></div>
-                        <span style="background:#fef9ee;color:#c9a84c;border:1px solid rgba(201,168,76,0.4);font-size:10px;font-weight:900;padding:3px 10px;border-radius:99px;">MAP 2</span>
+            <div class="glass-card rounded-3xl border border-amber-100 flex flex-col overflow-hidden shadow-sm">
+                <div class="h-2 flex-shrink-0" style="background:linear-gradient(90deg,#c9a84c,#9a7a2c);"></div>
+                <div class="p-10 flex-1 flex flex-col justify-between">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="text-gold text-4xl"><i class="fa-solid fa-rotate"></i></div>
+                        <span style="background:#fef9ee;color:#c9a84c;border:1px solid rgba(201,168,76,0.4);font-size:12px;font-weight:900;padding:5px 14px;border-radius:99px;">MAP 2</span>
                     </div>
                     <div>
-                        <h3 class="font-bold text-brand mb-1">Performance matrix</h3>
-                        <p class="text-xs text-slate-400">8-15 K-D on Nuke (-4.78% Swing)</p>
+                        <h3 class="text-xl font-bold text-brand mb-2">Performance Matrix</h3>
+                        <p class="text-base text-slate-400">High impact on Dust2, under-performer on Nuke.</p>
                     </div>
                 </div>
             </div>
-            <div onclick="navigateToEvidence('hltv')" class="glass-card rounded-2xl border border-red-100 flex flex-col overflow-hidden shadow-sm cursor-pointer hover:bg-slate-50 transition-colors">
-                <div class="h-1.5 flex-shrink-0" style="background:linear-gradient(90deg,#dc2626,#991b1b);"></div>
-                <div class="p-6 flex-1 flex flex-col justify-between">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="text-anomaly text-2xl"><i class="fa-solid fa-arrow-trend-down"></i></div>
+            <div onclick="navigateToEvidence('hltv')" class="glass-card rounded-3xl border border-red-100 flex flex-col overflow-hidden shadow-sm cursor-pointer hover:bg-slate-50 transition-colors">
+                <div class="h-2 flex-shrink-0" style="background:linear-gradient(90deg,#dc2626,#991b1b);"></div>
+                <div class="p-10 flex-1 flex flex-col justify-between">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="text-anomaly text-4xl"><i class="fa-solid fa-arrow-trend-down"></i></div>
                     </div>
                     <div>
-                        <h3 class="font-bold text-brand mb-1">Action Analysis</h3>
-                        <p class="text-xs text-slate-400">Panicked kills and tactical errors in critical rounds.</p>
+                        <h3 class="text-xl font-bold text-brand mb-2">Intel</h3>
+                        <p class="text-base text-slate-400">HLTV forum comment before the match start.</p>
                     </div>
                 </div>
             </div>
@@ -189,37 +209,135 @@
 
 <!-- ═══════════════════════════════ BETTING MARKET ═══════════════════════════════ -->
 <section id="view-market" class="view hidden p-6 md:p-12 space-y-12 animate-fade-in">
-    <div class="max-w-6xl mx-auto">
+    <div class="w-full">
         <div class="mb-10">
             <h2 class="text-3xl font-extrabold text-brand mb-1">Market Odds</h2>
-            <p class="text-slate-500 leading-relaxed max-w-3xl">Historical kill line fluctuations for 'bodyy' during the CS Asia Championships 2025. Analysis focuses on pre-match drift across multiple map series.</p>
+            <p class="text-slate-500 leading-relaxed max-w-3xl">bodyy's kill line for Map 2 (Nuke) spiked +1.0 then dropped −1.0, settling 27 minutes before game start — a suspicious pattern following his strong Map 1 performance on Dust2.</p>
         </div>
 
         <div class="mb-12">
-            <div class="glass-card p-8 rounded-[2.5rem] shadow-sm mb-6">
+            <div class="p-8 rounded-[2.5rem] mb-6" style="background:#f8fafc;">
                 <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest">BODYY'S Kill Line Drift</h3>
-                    <div class="text-[10px] font-mono text-anomaly font-bold border border-anomaly/20 bg-red-50 px-3 py-1 rounded-full">CS ASIA CHAMPIONSHIPS 2025</div>
+                    <h3 class="text-xs font-bold text-slate-600 uppercase tracking-widest">BODYY's Kill Line Drift</h3>
+                    <div class="text-[10px] font-mono text-anomaly font-bold border border-anomaly/20 bg-red-50 px-3 py-1 rounded-full">MAP 2 (NUKE)</div>
                 </div>
                 <div class="chart-container" style="height:400px;"><canvas id="marketChart"></canvas></div>
             </div>
         </div>
 
-        <div class="glass-card rounded-[2.5rem] shadow-sm p-8 md:p-10 mb-12 border-l-4 border-gold">
-            <div class="space-y-4">
-                <div class="text-2xl md:text-3xl font-black text-brand tracking-tight">
-                    If kill line of a player increase -> Over Performance
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-8">
+            <div class="bg-white rounded-[2.5rem] border border-slate-200 shadow-sm overflow-hidden">
+                <div class="px-8 py-6 flex flex-col items-center justify-center text-center" style="background:linear-gradient(135deg,#1e3a5f 0%,#0f2340 100%);">
+                    <h4 class="text-white font-black text-3xl leading-none">Map 1</h4>
+                    <div class="text-sm font-bold uppercase tracking-widest text-white/60 mt-1">Dust2</div>
                 </div>
-                <div class="text-2xl md:text-3xl font-black text-anomaly tracking-tight">
-                    If kill line of a player decrease -> Under performance
+                <div class="overflow-x-auto">
+                    <table class="tournament-table w-full text-left">
+                        <thead>
+                            <tr>
+                                <th class="px-8">Player</th>
+                                <th class="px-8 text-center">Kill Line</th>
+                                <th class="px-8 text-center">Fluctuations</th>
+                                <th class="px-8 text-center">K-D</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm font-medium">
+                            <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                                <td class="px-8 py-4 font-bold text-brand">Maka</td>
+                                <td class="px-8 py-4 text-center font-mono whitespace-nowrap">13.5</td>
+                                <td class="px-8 py-4 text-center text-slate-500 font-mono whitespace-nowrap">0</td>
+                                <td class="px-8 py-4 text-center font-black text-brand whitespace-nowrap">11-13</td>
+                            </tr>
+                            <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                                <td class="px-8 py-4 font-bold text-brand">Lucky</td>
+                                <td class="px-8 py-4 text-center font-mono whitespace-nowrap">13.5</td>
+                                <td class="px-8 py-4 text-center text-slate-500 font-mono whitespace-nowrap">0</td>
+                                <td class="px-8 py-4 text-center font-black text-brand whitespace-nowrap">13-10</td>
+                            </tr>
+                            <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                                <td class="px-8 py-4 font-bold text-brand">Graviti</td>
+                                <td class="px-8 py-4 text-center font-mono whitespace-nowrap">12.5</td>
+                                <td class="px-8 py-4 text-center text-slate-500 font-mono whitespace-nowrap">0</td>
+                                <td class="px-8 py-4 text-center font-black text-brand whitespace-nowrap">13-10</td>
+                            </tr>
+                            <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                                <td class="px-8 py-4 font-bold text-brand">Ex3rcice</td>
+                                <td class="px-8 py-4 text-center font-mono whitespace-nowrap">14.5</td>
+                                <td class="px-8 py-4 text-center text-slate-500 font-mono whitespace-nowrap">0</td>
+                                <td class="px-8 py-4 text-center font-black text-brand whitespace-nowrap">18-9</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="px-8 py-4 font-bold text-brand">bodyy</td>
+                                <td class="px-8 py-4 text-center font-mono whitespace-nowrap">13.5</td>
+                                <td class="px-8 py-4 text-center text-slate-500 font-mono whitespace-nowrap">0</td>
+                                <td class="px-8 py-4 text-center font-black text-brand whitespace-nowrap">16-13</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+
+            <div class="bg-white rounded-[2.5rem] border border-red-100 shadow-sm overflow-hidden">
+                <div class="px-8 py-6 flex flex-col items-center justify-center text-center" style="background:linear-gradient(135deg,#dc2626 0%,#991b1b 100%);">
+                    <h4 class="text-white font-black text-3xl leading-none">Map 2</h4>
+                    <div class="text-sm font-bold uppercase tracking-widest text-white/60 mt-1">Nuke</div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="tournament-table w-full text-left">
+                        <thead>
+                            <tr>
+                                <th class="px-8">Player</th>
+                                <th class="px-8 text-center">Kill Line</th>
+                                <th class="px-8 text-center">Fluctuations</th>
+                                <th class="px-8 text-center">K-D</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm font-medium">
+                            <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                                <td class="px-8 py-4 font-bold text-brand">Ex3rcice</td>
+                                <td class="px-8 py-4 text-center font-mono whitespace-nowrap">14.5</td>
+                                <td class="px-8 py-4 text-center text-slate-500 font-mono whitespace-nowrap">0</td>
+                                <td class="px-8 py-4 text-center font-black text-brand whitespace-nowrap">17-11</td>
+                            </tr>
+                            <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                                <td class="px-8 py-4 font-bold text-brand">Maka</td>
+                                <td class="px-8 py-4 text-center font-mono whitespace-nowrap">13.5</td>
+                                <td class="px-8 py-4 text-center text-slate-500 font-mono whitespace-nowrap">0</td>
+                                <td class="px-8 py-4 text-center font-black text-brand whitespace-nowrap">15-12</td>
+                            </tr>
+                            <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                                <td class="px-8 py-4 font-bold text-brand">Lucky</td>
+                                <td class="px-8 py-4 text-center font-mono whitespace-nowrap">13.5</td>
+                                <td class="px-8 py-4 text-center text-slate-500 font-mono whitespace-nowrap">0</td>
+                                <td class="px-8 py-4 text-center font-black text-brand whitespace-nowrap">12-12</td>
+                            </tr>
+                            <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                                <td class="px-8 py-4 font-bold text-brand">Graviti</td>
+                                <td class="px-8 py-4 text-center font-mono whitespace-nowrap">12.5</td>
+                                <td class="px-8 py-4 text-center text-slate-500 font-mono whitespace-nowrap">0</td>
+                                <td class="px-8 py-4 text-center font-black text-brand whitespace-nowrap">10-13</td>
+                            </tr>
+                            <tr class="bg-red-50 hover:bg-red-100 transition-colors">
+                                <td class="px-8 py-4 font-bold text-anomaly">bodyy</td>
+                                <td class="px-8 py-4 text-center font-mono text-anomaly font-bold whitespace-nowrap">12.5 - 13.5 - 12.5</td>
+                                <td class="px-8 py-4 text-center font-mono text-anomaly font-bold whitespace-nowrap">+1 UP -1 DOWN</td>
+                                <td class="px-8 py-4 text-center font-black text-anomaly whitespace-nowrap">8-15</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4 mb-2 px-2 text-[11px] text-slate-400 font-mono space-y-1">
+            <p><span class="font-bold text-slate-500">✦</span> If kill line of a player increase &rarr; Over Performance</p>
+            <p><span class="font-bold text-slate-500">✦</span> If kill line of a player decrease &rarr; Under Performance</p>
         </div>
 
         <div class="bg-white rounded-[2.5rem] border border-slate-200 shadow-sm overflow-hidden mt-8">
             <div class="p-8 bg-brand flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h4 class="text-gold font-bold text-lg leading-none mb-2">BODYY's Performance & Odds History</h4>
+                    <h4 class="text-gold font-bold text-lg leading-none mb-2">BODYY's Performance &amp; Odds History</h4>
                     <p class="text-white/40 text-[10px] font-mono uppercase tracking-[0.2em]">CS Asia Championships 2025</p>
                 </div>
             </div>
@@ -249,181 +367,270 @@
 </section>
 
 <!-- ═══════════════════════════════ PERFORMANCE MATRIX ═══════════════════════════════ -->
-<section id="view-perf" class="view hidden p-6 md:p-12 space-y-12 animate-fade-in">
-    <div class="max-w-6xl mx-auto">
-        <div class="mb-10">
-            <h2 class="text-3xl font-extrabold text-brand mb-1">Performance Matrix</h2>
-            <p class="text-slate-500 max-w-3xl">Comparative analysis of Map 1 (Dust2) vs Map 2 (Nuke) performance indicators.</p>
-        </div>
-
-        <!-- Map Context Cards -->
-        <div class="glass-card rounded-[2.5rem] overflow-hidden shadow-sm mb-10">
-            <div style="background:linear-gradient(135deg,#1e3a5f 0%,#0f2340 100%);" class="px-8 py-5 flex items-center justify-between">
-                <div>
-                    <div class="text-[10px] font-bold uppercase tracking-widest mb-1" style="color:rgba(255,255,255,0.45);">Match Context · 3DMAX Performance</div>
-                    <div class="text-white font-black text-sm uppercase tracking-wider">Map Performance Inversion</div>
-                </div>
-            </div>
-            <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="glass-card p-8 rounded-[2.5rem] border border-emerald-100 bg-emerald-50/10">
-                    <div class="flex justify-between items-center mb-6">
-                        <h3 class="text-emerald-700 font-bold uppercase tracking-widest text-[10px]">MAP 1 (DUST2) - RANK 2 FOR BODYY</h3>
-                        <span class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-[10px] font-black italic">RATING 1.25</span>
-                    </div>
-                    <div class="text-5xl font-black text-brand mb-4">High Impact</div>
-                    <p class="text-slate-500 text-sm leading-relaxed">16-13 K-D (+3.10% Swing) | ADR 87.3</p>
-                    <div class="mt-8" style="background:#f8fafc;border:1.5px solid #d1d5db;border-radius:24px;padding:16px;">
-                        <img src="assets/images/HLTV-MAP1.jpeg" alt="Map 1 Dust2 performance" class="w-full h-auto rounded-2xl shadow-sm">
-                    </div>
-                </div>
-                <div class="glass-card p-8 rounded-[2.5rem] border border-red-100 bg-red-50/10">
-                    <div class="flex justify-between items-center mb-6">
-                        <h3 class="text-anomaly font-bold uppercase tracking-widest text-[10px]">MAP 2 (NUKE) - RANK 3 FOR BODYY</h3>
-                        <span class="bg-red-100 text-anomaly px-3 py-1 rounded-full text-[10px] font-black italic">RATING 0.67</span>
-                    </div>
-                    <div class="text-5xl font-black text-anomaly mb-4">Under Performer</div>
-                    <p class="text-slate-500 text-sm leading-relaxed">8-15 K-D (-4.78% Swing) | ADR 57.9</p>
-                    <div class="mt-8" style="background:#f8fafc;border:1.5px solid #d1d5db;border-radius:24px;padding:16px;">
-                        <img src="assets/images/HLTV-MAP2.jpeg" alt="Map 2 Nuke performance" class="w-full h-auto rounded-2xl shadow-sm">
-                    </div>
-                </div>
+<section id="view-perf" class="view hidden p-6 md:p-12 animate-fade-in">
+    <div class="w-full">
+        <div class="mb-8">
+            <h2 class="text-3xl font-extrabold text-brand mb-6">Performance Matrix</h2>
+            <div class="flex gap-2 w-full">
+                <button onclick="navigatePerf('inversion')" id="perf-btn-inversion" class="perf-tab perf-tab-active flex-1 py-2 text-xs font-black uppercase tracking-widest rounded-full border transition-all">INVERSION</button>
+                <button onclick="navigatePerf('index')" id="perf-btn-index" class="perf-tab flex-1 py-2 text-xs font-black uppercase tracking-widest rounded-full border transition-all">INDEX</button>
+                <button onclick="navigatePerf('accuracy')" id="perf-btn-accuracy" class="perf-tab flex-1 py-2 text-xs font-black uppercase tracking-widest rounded-full border transition-all">ACCURACY</button>
+                <button onclick="navigatePerf('economy')" id="perf-btn-economy" class="perf-tab flex-1 py-2 text-xs font-black uppercase tracking-widest rounded-full border transition-all">ECONOMY</button>
+                <button onclick="navigatePerf('ratings')" id="perf-btn-ratings" class="perf-tab flex-1 py-2 text-xs font-black uppercase tracking-widest rounded-full border transition-all">RATINGS</button>
             </div>
         </div>
 
-        <!-- Career Map Ratings -->
-        <div class="bg-white rounded-[2.5rem] border border-slate-200 shadow-sm overflow-hidden mb-10">
-            <div class="px-8 py-6 bg-brand">
-                <h4 class="text-gold font-bold text-lg leading-none">Career Map Ratings</h4>
-            </div>
-            <div class="overflow-x-auto">
-                <table class="tournament-table w-full text-left">
-                    <thead>
-                        <tr>
-                            <th class="px-8">Map Name</th>
-                            <th class="px-8 text-center">Rating</th>
-                            <th class="px-8 text-center">Rank</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-sm font-medium">
-                        <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
-                            <td class="px-8 py-4 font-bold text-brand">Ancient</td>
-                            <td class="px-8 py-4 text-center font-mono">1.04</td>
-                            <td class="px-8 py-4 text-center font-black">1</td>
-                        </tr>
-                        <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
-                            <td class="px-8 py-4 font-bold text-brand">Dust2</td>
-                            <td class="px-8 py-4 text-center font-mono">1.02</td>
-                            <td class="px-8 py-4 text-center font-black">2</td>
-                        </tr>
-                        <tr class="border-b border-slate-100 bg-red-50 hover:bg-red-100 transition-colors">
-                            <td class="px-8 py-4 font-bold text-anomaly">Nuke</td>
-                            <td class="px-8 py-4 text-center font-mono text-anomaly">1.00</td>
-                            <td class="px-8 py-4 text-center font-black text-anomaly">3</td>
-                        </tr>
-                        <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
-                            <td class="px-8 py-4 font-bold text-brand">Overpass</td>
-                            <td class="px-8 py-4 text-center font-mono">0.97</td>
-                            <td class="px-8 py-4 text-center font-black">4</td>
-                        </tr>
-                        <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
-                            <td class="px-8 py-4 font-bold text-brand">Inferno</td>
-                            <td class="px-8 py-4 text-center font-mono">0.96</td>
-                            <td class="px-8 py-4 text-center font-black">5</td>
-                        </tr>
-                        <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
-                            <td class="px-8 py-4 font-bold text-brand">Train</td>
-                            <td class="px-8 py-4 text-center font-mono">0.95</td>
-                            <td class="px-8 py-4 text-center font-black">6</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50 transition-colors">
-                            <td class="px-8 py-4 font-bold text-brand">Mirage</td>
-                            <td class="px-8 py-4 text-center font-mono">0.90</td>
-                            <td class="px-8 py-4 text-center font-black">7</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <!-- INVERSION Panel -->
+        <div id="perf-panel-inversion" class="perf-panel">
+            <div class="glass-card rounded-[2.5rem] overflow-hidden shadow-sm mb-10">
+                <div style="background:linear-gradient(135deg,#1e3a5f 0%,#0f2340 100%);" class="px-8 py-5 flex items-center justify-between">
+                    <div>
+                        <div class="text-[10px] font-bold uppercase tracking-widest mb-1" style="color:rgba(255,255,255,0.45);">Match Context · CS Asia Championships 2025</div>
+                        <div class="text-white font-black text-sm uppercase tracking-wider">Performance Inversion</div>
+                    </div>
+                </div>
+                <div class="p-12 grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-emerald-700 font-bold uppercase tracking-widest text-[10px]">MAP 1 (DUST2) - RANK 2 FOR BODYY</h3>
+                            <span class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-[10px] font-black italic">RATING 1.25</span>
+                        </div>
+                        <div class="text-4xl font-black text-brand mb-2">High Impact</div>
+                        <p class="text-slate-500 text-sm mb-4">16-13 K-D (+3.10% Swing) | ADR 87.3</p>
+                        <img src="assets/images/HLTV-MAP1.jpeg" alt="Map 1 Dust2 performance screenshot" class="w-full h-auto rounded-2xl shadow-sm">
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-anomaly font-bold uppercase tracking-widest text-[10px]">MAP 2 (NUKE) - RANK 3 FOR BODYY</h3>
+                            <span class="bg-red-100 text-anomaly px-3 py-1 rounded-full text-[10px] font-black italic">RATING 0.67</span>
+                        </div>
+                        <div class="text-4xl font-black text-anomaly mb-2">Under Performer</div>
+                        <p class="text-slate-500 text-sm mb-4">8-15 K-D (-4.78% Swing) | ADR 57.9</p>
+                        <img src="assets/images/HLTV-MAP2.jpeg" alt="Map 2 Nuke performance screenshot" class="w-full h-auto rounded-2xl shadow-sm">
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Chart -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
-            <div class="glass-card p-10 rounded-[3rem] shadow-sm">
+        <!-- INDEX Panel -->
+        <div id="perf-panel-index" class="perf-panel hidden">
+            <div class="glass-card p-12 rounded-[3rem] shadow-sm mb-10">
                 <div class="mb-8">
-                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-1">Present Match (PM) vs Career Baseline (CM)</h3>
-                    <p class="text-[10px] text-slate-300 font-mono">Blue: PM | Red: CM</p>
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-1">Performance Index</h3>
+                    <p class="text-[10px] text-slate-300 font-mono">% of career avg baseline — gold line = 100% (normal)</p>
                 </div>
-                <div class="chart-container" style="height:380px;"><canvas id="perfChart"></canvas></div>
+                <div class="chart-container" style="height:480px;"><canvas id="perfChart"></canvas></div>
             </div>
+        </div>
 
-            <div class="space-y-6">
-                <div class="glass-card rounded-[2.5rem] shadow-sm p-8 border-l-4 border-gold">
-                    <h3 class="text-xl font-bold text-brand mb-4">Core Metrics Comparison</h3>
-                    <div class="grid grid-cols-2 gap-6">
-                        <div>
-                            <div class="text-[10px] font-bold text-slate-400 uppercase">KDR (PM vs CM)</div>
-                            <div class="text-2xl font-black text-brand">1.01 vs 0.53</div>
-                        </div>
-                        <div>
-                            <div class="text-[10px] font-bold text-slate-400 uppercase">KPR (PM vs CM)</div>
-                            <div class="text-2xl font-black text-brand">0.69 vs 0.40</div>
-                        </div>
-                        <div>
-                            <div class="text-[10px] font-bold text-slate-400 uppercase">DPR (PM vs CM)</div>
-                            <div class="text-2xl font-black text-brand">0.68 vs 0.75</div>
-                        </div>
-                        <div>
-                            <div class="text-[10px] font-bold text-slate-400 uppercase">ADR (PM vs CM)</div>
-                            <div class="text-2xl font-black text-brand">77.8 vs 57.9</div>
-                        </div>
+        <!-- ACCURACY Panel -->
+        <div id="perf-panel-accuracy" class="perf-panel hidden">
+            <div class="glass-card rounded-[2.5rem] shadow-sm border border-red-100 overflow-hidden mb-10">
+                <div style="background:linear-gradient(135deg,#dc2626 0%,#991b1b 100%);" class="px-8 py-5 flex items-center justify-between">
+                    <div>
+                        <div class="text-[10px] font-bold text-white/60 uppercase tracking-widest mb-0.5">Tactical Accuracy</div>
+                        <div class="text-white font-black text-sm uppercase tracking-wider">Shot-on-Target Analysis</div>
                     </div>
                 </div>
-
-                <!-- Accuracy & Utility Monitoring -->
-                <div class="glass-card rounded-2xl p-6 bg-slate-50 border border-slate-200">
-                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Integrity Indicators</h4>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-sm font-semibold text-brand">Tactical Accuracy</span>
-                        <span class="text-[10px] font-mono font-bold bg-slate-200 text-slate-500 px-3 py-1 rounded-full uppercase">Monitoring</span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm font-semibold text-brand">Utility Economy</span>
-                        <span class="text-[10px] font-mono font-bold bg-slate-200 text-slate-500 px-3 py-1 rounded-full uppercase">Monitoring</span>
+                <div class="p-12 space-y-8">
+                    <!-- Shot Accuracy -->
+                    <div>
+                        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-6">Shot Accuracy Comparison</div>
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div style="background:#fef2f2;border:2px solid #fecaca;" class="rounded-2xl p-6 text-center">
+                                <div class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Current Map Accuracy</div>
+                                <div style="font-size:2.8rem;font-weight:900;color:#dc2626;line-height:1;">13.89%</div>
+                                <div class="text-[11px] font-mono text-anomaly/70 mt-2 font-bold">Map 2 (Nuke)</div>
+                            </div>
+                            <div style="background:#f8fafc;border:2px solid #e2e8f0;" class="rounded-2xl p-6 text-center">
+                                <div class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Past Accuracy (Career Avg)</div>
+                                <div style="font-size:2.8rem;font-weight:900;color:#1e3a5f;line-height:1;">13.7%</div>
+                                <div class="text-[11px] font-mono text-brand/50 mt-2 font-bold">Historical baseline</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-5 items-stretch">
+                            <div class="space-y-4" style="flex:3;">
+                                <div>
+                                    <div class="flex justify-between text-[10px] font-bold uppercase mb-2">
+                                        <span style="color:#dc2626;">Current Map</span>
+                                        <span style="color:#dc2626;">13.89%</span>
+                                    </div>
+                                    <div class="h-7 w-full rounded-full overflow-hidden" style="background:#fecaca;">
+                                        <div class="h-full rounded-full" style="width:55.56%;background:#dc2626;"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-[10px] font-bold uppercase mb-2">
+                                        <span style="color:#1e3a5f;">Past Avg</span>
+                                        <span style="color:#1e3a5f;">13.7%</span>
+                                    </div>
+                                    <div class="h-7 w-full rounded-full overflow-hidden" style="background:#dbeafe;">
+                                        <div class="h-full rounded-full" style="width:54.8%;background:#1e3a5f;"></div>
+                                    </div>
+                                </div>
+                                <div class="text-right text-[9px] font-mono text-slate-300">visual scale: 0 – 25%</div>
+                            </div>
+                            <div class="flex flex-col items-center justify-center text-center" style="flex:1.2;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:16px;padding:10px 14px;">
+                                <div class="text-[10px] font-bold text-slate-500 uppercase mb-1" style="line-height:1.4;">Accuracy change<br>vs career baseline</div>
+                                <div style="font-size:1.8rem;font-weight:900;color:#1e3a5f;line-height:1;">+0.19 pp</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- ECONOMY Panel -->
+        <div id="perf-panel-economy" class="perf-panel hidden">
+            <div class="glass-card rounded-[2.5rem] shadow-sm border border-slate-200 overflow-hidden mb-10">
+                <div style="background:linear-gradient(135deg,#991b1b 0%,#dc2626 100%);" class="px-8 py-5 flex items-center justify-between">
+                    <div>
+                        <div class="text-[10px] font-bold text-white/60 uppercase tracking-widest mb-0.5">Utility Economy</div>
+                        <div class="text-white font-black text-sm uppercase tracking-wider">Utility Waste Signal</div>
+                    </div>
+                    <span style="background:rgba(255,255,255,0.15);color:#fff;font-size:10px;font-weight:900;padding:4px 14px;border-radius:99px;">+33.5% EXCESS</span>
+                </div>
+                <div class="p-12">
+                    <!-- Utility Waste -->
+                    <div class="space-y-5 mb-9">
+                        <div>
+                            <div class="flex items-end justify-between mb-2">
+                                <div>
+                                    <div class="text-[10px] font-bold text-slate-400 uppercase">5 Maps Avg Utility Waste</div>
+                                    <div style="font-size:1.8rem;font-weight:900;color:#1e3a5f;line-height:1.1;">$12,133</div>
+                                </div>
+                                <span style="background:#eff6ff;color:#1e3a5f;font-size:10px;font-weight:900;padding:3px 12px;border-radius:99px;">Baseline 100%</span>
+                            </div>
+                            <div class="h-6 w-full rounded-full overflow-hidden" style="background:#dbeafe;">
+                                <div class="h-full rounded-full" style="width:75%;background:#1e3a5f;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-end justify-between mb-2">
+                                <div>
+                                    <div class="text-[10px] font-bold text-slate-400 uppercase">Anomaly Waste (Map 2 Nuke)</div>
+                                    <div style="font-size:1.8rem;font-weight:900;color:#dc2626;line-height:1.1;">$16,200</div>
+                                </div>
+                                <span style="background:#fef2f2;color:#dc2626;border:1px solid #fca5a5;font-size:10px;font-weight:900;padding:3px 12px;border-radius:99px;">133.5% of Avg</span>
+                            </div>
+                            <div class="h-6 w-full rounded-full overflow-hidden" style="background:#fecaca;">
+                                <div class="h-full rounded-full" style="width:100%;background:#dc2626;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stat boxes row -->
+                    <div class="grid grid-cols-3 gap-3 mb-10">
+                        <div style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:16px;" class="p-4 text-center">
+                            <div style="font-size:1.2rem;font-weight:900;color:#1e3a5f;">$12,133</div>
+                            <div class="text-[9px] font-bold text-slate-400 uppercase mt-1">5 Map Avg</div>
+                        </div>
+                        <div style="background:#fef2f2;border:1.5px solid #fca5a5;border-radius:16px;" class="p-4 text-center">
+                            <div style="font-size:1.2rem;font-weight:900;color:#dc2626;">$16,200</div>
+                            <div class="text-[9px] font-bold text-slate-400 uppercase mt-1">Actual Waste</div>
+                        </div>
+                        <div style="background:#fef2f2;border:1.5px solid #fca5a5;border-radius:16px;" class="p-4 text-center">
+                            <div style="font-size:1.2rem;font-weight:900;color:#dc2626;">+$4,067</div>
+                            <div class="text-[9px] font-bold text-slate-400 uppercase mt-1">Excess Waste</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- RATINGS Panel -->
+        <div id="perf-panel-ratings" class="perf-panel hidden">
+            <div class="glass-card rounded-[2.5rem] shadow-sm border border-slate-200 overflow-hidden mb-10">
+                <div style="background:linear-gradient(135deg,#1e3a5f 0%,#0f2340 100%);" class="px-8 py-5 flex items-center justify-between">
+                    <div>
+                        <div class="text-[10px] font-bold text-white/60 uppercase tracking-widest mb-0.5">Historical Profile</div>
+                        <div class="text-white font-black text-sm uppercase tracking-wider">Career Map Ratings</div>
+                    </div>
+                    <span style="background:rgba(255,255,255,0.15);color:#fff;font-size:10px;font-weight:900;padding:4px 14px;border-radius:99px;">NUKE ANOMALY</span>
+                </div>
+                <div class="p-12">
+                    <p class="text-slate-500 text-sm mb-8">bodyy's career rating on Nuke ranks #3 — yet Map 2 Nuke produced a 0.67 rating, a significant deviation from his established baseline on this map.</p>
+                    <div class="overflow-x-auto">
+                        <table class="tournament-table w-full text-left">
+                            <thead>
+                                <tr>
+                                    <th class="px-8">Map Name</th>
+                                    <th class="px-8 text-center">Career Rating</th>
+                                    <th class="px-8 text-center">Rank</th>
+                                    <th class="px-8 text-center">Anomaly Match</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm font-medium">
+                                <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                                    <td class="px-8 py-4 font-bold text-brand">Ancient</td>
+                                    <td class="px-8 py-4 text-center font-mono">1.04</td>
+                                    <td class="px-8 py-4 text-center font-black">1</td>
+                                    <td class="px-8 py-4 text-center text-slate-400 font-mono">—</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                                    <td class="px-8 py-4 font-bold text-brand">Dust2</td>
+                                    <td class="px-8 py-4 text-center font-mono">1.02</td>
+                                    <td class="px-8 py-4 text-center font-black">2</td>
+                                    <td class="px-8 py-4 text-center text-slate-400 font-mono">1.25 (Map 1)</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 bg-red-50 hover:bg-red-100 transition-colors">
+                                    <td class="px-8 py-4 font-bold text-anomaly">Nuke</td>
+                                    <td class="px-8 py-4 text-center font-mono text-anomaly font-bold">1.00</td>
+                                    <td class="px-8 py-4 text-center font-black text-anomaly">3</td>
+                                    <td class="px-8 py-4 text-center font-black text-anomaly">0.67 ← FLAGGED</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                                    <td class="px-8 py-4 font-bold text-brand">Overpass</td>
+                                    <td class="px-8 py-4 text-center font-mono">0.97</td>
+                                    <td class="px-8 py-4 text-center font-black">4</td>
+                                    <td class="px-8 py-4 text-center text-slate-400 font-mono">—</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                                    <td class="px-8 py-4 font-bold text-brand">Inferno</td>
+                                    <td class="px-8 py-4 text-center font-mono">0.96</td>
+                                    <td class="px-8 py-4 text-center font-black">5</td>
+                                    <td class="px-8 py-4 text-center text-slate-400 font-mono">—</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                                    <td class="px-8 py-4 font-bold text-brand">Train</td>
+                                    <td class="px-8 py-4 text-center font-mono">0.95</td>
+                                    <td class="px-8 py-4 text-center font-black">6</td>
+                                    <td class="px-8 py-4 text-center text-slate-400 font-mono">—</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="px-8 py-4 font-bold text-brand">Mirage</td>
+                                    <td class="px-8 py-4 text-center font-mono">0.90</td>
+                                    <td class="px-8 py-4 text-center font-black">7</td>
+                                    <td class="px-8 py-4 text-center text-slate-400 font-mono">—</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </section>
 
 <!-- ═══════════════════════════════ INTEL ═══════════════════════════════ -->
 <section id="view-intel" class="view hidden p-6 md:p-12 space-y-10 animate-fade-in">
     <div class="max-w-5xl mx-auto">
-
         <div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
-                <div class="inline-flex items-center px-3 py-1 bg-brand/5 border border-brand/10 rounded-full text-[10px] font-black text-brand tracking-widest uppercase mb-3">Classified Intelligence Feed</div>
                 <h2 class="text-3xl font-extrabold text-brand mb-1">Intel Feed</h2>
-                <p class="text-slate-500 text-sm">Open-source monitoring for 'bodyy'</p>
-            </div>
-            <div style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:16px;" class="px-5 py-3 flex items-center gap-3 flex-shrink-0">
-                <span class="text-lg" style="color:#94a3b8;">●</span>
-                <div>
-                    <div class="text-[10px] font-bold text-slate-400 uppercase">Source Status</div>
-                    <div class="font-black text-sm uppercase text-slate-500">MONITORING</div>
-                </div>
+                <p class="text-slate-500 text-sm">Open-source forum observations — Match 17 · CS Asia Championships 2025</p>
             </div>
         </div>
 
-        <!-- Publicly Archived Discussion Thread -->
         <div class="mt-10">
             <div class="flex items-center gap-3 mb-6">
                 <div class="h-px flex-1 bg-slate-200"></div>
                 <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">publicly archived discussion thread</span>
                 <div class="h-px flex-1 bg-slate-200"></div>
             </div>
-            <!-- HLTV Screenshot -->
             <div id="intel-hltv" class="glass-card rounded-[2.5rem] overflow-hidden shadow-sm">
-                <!-- Header bar -->
                 <div style="background:linear-gradient(135deg,#0f1923 0%,#1e3a5c 100%);" class="px-8 py-5 flex items-center justify-between">
                     <div class="flex items-center gap-3">
                         <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;flex-shrink:0;">
@@ -431,19 +638,17 @@
                         </div>
                         <div>
                             <div class="text-white font-black text-sm">HLTV — Match Thread Comments</div>
-                            <div class="text-[10px]" style="color:rgba(255,255,255,0.5);">3dmax vs FaZe · Starladder Budapest Major 2025 · December 2025</div>
+                            <div class="text-[10px]" style="color:rgba(255,255,255,0.5);">3DMAX vs Team Liquid · CS Asia Championships 2025 · October 2025</div>
                         </div>
                     </div>
                 </div>
-                <!-- Screenshots -->
                 <div style="background:#f8fafc;padding:24px;display:flex;flex-direction:column;gap:16px;">
                     <img src="assets/images/WhatsApp Image 2026-05-12 at 19.47.00.jpeg" alt="HLTV Forum Comments — Part 1" style="width:100%;border-radius:16px;border:2px solid #e2e8f0;box-shadow:0 4px 20px rgba(0,0,0,0.08);">
                     <img src="assets/images/WhatsApp Image 2026-05-12 at 16.44.11.jpeg" alt="HLTV Forum Comments — Part 2" style="width:100%;border-radius:16px;border:2px solid #e2e8f0;box-shadow:0 4px 20px rgba(0,0,0,0.08);">
                 </div>
-                <!-- Footer -->
                 <div style="background:#0f1923;border-top:1px solid #1e3a5c;padding:10px 32px;">
-                    <div style="color:#fca5a5;font-size:9px;font-family:'JetBrains Mono',monospace;text-align:center;letter-spacing:0.12em;">
-                        ⚠ OSINT ARCHIVE — CASE FILE 092-X-MAKA · HLTV MATCH THREAD · DECEMBER 2025
+                    <div style="color:#fca5a5;font-size:9px;text-align:center;letter-spacing:0.12em;">
+                        ⚠ OSINT ARCHIVE — CASE FILE 093-X · HLTV MATCH THREAD · OCTOBER 2025
                     </div>
                 </div>
             </div>
@@ -458,11 +663,10 @@
         <div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
                 <h2 class="text-3xl font-extrabold text-brand mb-1">Action Analysis</h2>
-                <p class="text-[11px] font-mono text-slate-400 uppercase tracking-widest">3DMAX Performance · Video Evidence</p>
+                <p class="text-[11px] font-mono text-slate-400 uppercase tracking-widest">3DMAX Performance · CS Asia Championships 2025 · Video Evidence</p>
             </div>
         </div>
 
-        <!-- ── Video Evidence ── -->
         <div class="mt-10">
             <div class="flex items-center gap-3 mb-6">
                 <div class="h-px flex-1 bg-slate-200"></div>
@@ -473,31 +677,34 @@
 
                 <!-- Video 1 -->
                 <div class="glass-card rounded-2xl overflow-hidden shadow-sm">
-                    <div style="background:#0a0e17;" class="aspect-video flex items-center justify-center relative">
+                    <div style="background:#0a0e17;" class="aspect-video relative">
                         <iframe class="w-full h-full absolute inset-0" src="https://www.youtube.com/embed/2Jebj1ptXjQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                     <div class="p-4 border-t border-slate-100">
-                        <div class="text-[13px] font-mono text-slate-500">Round 8: In round 8, he missed a kill, probably he panicked. High stress engagement failure despite clear visual advantage.</div>
+                        <div id="desc-1" class="text-[13px] font-mono text-slate-500 desc-clamp">Round 8: In round 8, he missed a kill, probably he panicked. High stress engagement failure despite clear visual advantage. Poor decision-making under pressure with multiple shots missed at close range.</div>
+                        <button onclick="toggleDesc('desc-1', this)" class="text-[11px] font-bold text-brand mt-2 hover:underline cursor-pointer">Read more</button>
                     </div>
                 </div>
 
                 <!-- Video 2 -->
                 <div class="glass-card rounded-2xl overflow-hidden shadow-sm">
-                    <div style="background:#0a0e17;" class="aspect-video flex items-center justify-center relative">
+                    <div style="background:#0a0e17;" class="aspect-video relative">
                         <iframe class="w-full h-full absolute inset-0" src="https://www.youtube.com/embed/rtTeoN30RkU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                     <div class="p-4 border-t border-slate-100">
-                        <div class="text-[13px] font-mono text-slate-500">Round 12: In Round 12, he went to a different roof, instead of walking he is running on roof. Running on roof is a clear giveaway to enemy. Tactical displacement error.</div>
+                        <div id="desc-2" class="text-[13px] font-mono text-slate-500 desc-clamp">Round 12: In Round 12, he went to a different roof, instead of walking he is running on roof. Running on roof is a clear giveaway to the enemy team. Tactical displacement error — exposed his position unnecessarily and allowed the opponents to pre-aim his location.</div>
+                        <button onclick="toggleDesc('desc-2', this)" class="text-[11px] font-bold text-brand mt-2 hover:underline cursor-pointer">Read more</button>
                     </div>
                 </div>
 
                 <!-- Video 3 -->
                 <div class="glass-card rounded-2xl overflow-hidden shadow-sm">
-                    <div style="background:#0a0e17;" class="aspect-video flex items-center justify-center relative">
+                    <div style="background:#0a0e17;" class="aspect-video relative">
                         <iframe class="w-full h-full absolute inset-0" src="https://www.youtube.com/embed/4BIDccqpyKU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                     <div class="p-4 border-t border-slate-100">
-                        <div class="text-[13px] font-mono text-slate-500">Round 20: In Round 20, he failed to use flash grenade in a critical retake/hold situation. Utility mismanagement leads to round loss.</div>
+                        <div id="desc-3" class="text-[13px] font-mono text-slate-500 desc-clamp">Round 20: In Round 20, he failed to use flash grenade in a critical retake/hold situation. Utility mismanagement leads to round loss. As IGL, bodyy was expected to coordinate the utility usage but instead held the flash and took an unfavourable duel, costing the round.</div>
+                        <button onclick="toggleDesc('desc-3', this)" class="text-[11px] font-bold text-brand mt-2 hover:underline cursor-pointer">Read more</button>
                     </div>
                 </div>
 
@@ -510,28 +717,13 @@
 </main>
 
 <script>
-    const tournamentLogs = [
-        { match:'Match 26 (1)', map:'Inferno',  line:'12.5', kills:20, flagged:false },
-        { match:'Match 26 (2)', map:'Train',    line:'12.5', kills:20, flagged:false },
-        { match:'Match X (1)',  map:'Dust2',   line:'13.5', kills:12, flagged:false },
-        { match:'Match X (2)',  map:'Inferno', line:'14.5 → 13.5', kills:9, flagged:true },
-        { match:'Match X (3)',  map:'Ancient',  line:'13.5', kills:10, flagged:false },
-        { match:'Match 35 (1)', map:'Mirage',   line:'13.5', kills:18, flagged:false },
-        { match:'Match 35 (2)', map:'Dust 2',   line:'13.5', kills:12, flagged:false },
-        { match:'Match 38 (1)', map:'Mirage',   line:'12.5 → 13.5', kills:32, flagged:false },
-        { match:'Match 38 (2)', map:'Dust 2',   line:'12.5 → 13.5', kills:10, flagged:false },
-        { match:'Match 40 (1)', map:'Nuke',     line:'13.5', kills:12, flagged:false },
-        { match:'Match 40 (2)', map:'Dust 2',   line:'13.5', kills:13, flagged:false },
-        { match:'Match 40 (3)', map:'Inferno',  line:'13.5', kills:23, flagged:false },
-    ];
-
     const marketRows = [
-        { match:'17(1)', fluctuation:'13.5',               time:'Stable',           map:'Dust2 (#2)',    kills:16, team:'Team Liquid #13',  flagged:false },
-        { match:'17(2)', fluctuation:'12.5 - 13.5 - 12.5', time:'Before start game', map:'Nuke (#3)',     kills:8,  team:'Team Liquid #13',  flagged:true },
-        { match:'17(3)', fluctuation:'12.5 - 13.5 - 12.5', time:'Before start map3', map:'Inferno (#5)',  kills:10, team:'Team Liquid #13',  flagged:true },
-        { match:'20(1)', fluctuation:'13.5',               time:'Stable',           map:'Nuke (#3)',     kills:6,  team:'Legacy #25',       flagged:false },
-        { match:'20(2)', fluctuation:'13.5',               time:'Stable',           map:'Dust2 (#2)',    kills:20, team:'Legacy #25',       flagged:false },
-        { match:'20(3)', fluctuation:'13.5',               time:'Stable',           map:'Inferno (#5)',  kills:19, team:'Legacy #25',       flagged:false },
+        { match:'17(1)', fluctuation:'13.5',               time:'Stable',            map:'Dust2 (#2)',   kills:16, team:'Team Liquid #13', flagged:false },
+        { match:'17(2)', fluctuation:'12.5 - 13.5 - 12.5', time:'Before start game', map:'Nuke (#3)',    kills:8,  team:'Team Liquid #13', flagged:true  },
+        { match:'17(3)', fluctuation:'12.5 - 13.5 - 12.5', time:'Before start map3', map:'Inferno (#5)', kills:10, team:'Team Liquid #13', flagged:true  },
+        { match:'20(1)', fluctuation:'13.5',               time:'Stable',            map:'Nuke (#3)',    kills:6,  team:'Legacy #25',      flagged:false },
+        { match:'20(2)', fluctuation:'13.5',               time:'Stable',            map:'Dust2 (#2)',   kills:20, team:'Legacy #25',      flagged:false },
+        { match:'20(3)', fluctuation:'13.5',               time:'Stable',            map:'Inferno (#5)', kills:19, team:'Legacy #25',      flagged:false },
     ];
 
     let activeCharts = { market:null, perf:null };
@@ -547,7 +739,41 @@
         document.getElementById('btn-' + tabId).classList.add('active');
         document.getElementById('btn-' + tabId).classList.remove('text-slate-500');
         if (tabId === 'market') renderMarketAssets();
-        if (tabId === 'perf')   renderPerfMatrix();
+        if (tabId === 'perf')   navigatePerf('inversion');
+    }
+
+    function applyCanvasBlur(img, blurPx) {
+        if (img.dataset.blurred) return;
+        img.dataset.blurred = '1';
+        const run = () => {
+            const pad = blurPx * 2;
+            const canvas = document.createElement('canvas');
+            canvas.width  = img.naturalWidth  || img.offsetWidth  || 800;
+            canvas.height = img.naturalHeight || img.offsetHeight || 600;
+            const ctx = canvas.getContext('2d');
+            ctx.filter = 'blur(' + blurPx + 'px)';
+            ctx.drawImage(img, -pad, -pad, canvas.width + pad * 2, canvas.height + pad * 2);
+            canvas.className = img.className;
+            canvas.style.width  = '100%';
+            canvas.style.height = 'auto';
+            canvas.style.display = 'block';
+            img.parentNode.replaceChild(canvas, img);
+        };
+        if (img.complete && img.naturalWidth) run();
+        else img.addEventListener('load', run);
+    }
+
+    function blurInversionImages() {
+        document.querySelectorAll('#perf-panel-inversion img').forEach(img => applyCanvasBlur(img, 4));
+    }
+
+    function navigatePerf(tabId) {
+        document.querySelectorAll('.perf-panel').forEach(p => p.classList.add('hidden'));
+        document.querySelectorAll('.perf-tab').forEach(b => b.classList.remove('perf-tab-active'));
+        document.getElementById('perf-panel-' + tabId).classList.remove('hidden');
+        document.getElementById('perf-btn-' + tabId).classList.add('perf-tab-active');
+        if (tabId === 'index')     renderPerfMatrix();
+        if (tabId === 'inversion') blurInversionImages();
     }
 
     function renderMarketAssets() {
@@ -573,28 +799,25 @@
         activeCharts.market = new Chart(ctx, {
             type:'line',
             data:{
-                labels:['Opening (T-60m)','Volatility 1','Volatility 2 (T-27m)','Final Pre-Series'],
+                labels:['Pre-Game Open (09:47)','Spike +1.0 (09:57)','Drop −1.0 (10:04)','2 Min Before Game Start (10:28)'],
                 datasets:[{
-                    label:'Map 2 Kill Line',
-                    data:[12.5, 13.5, 13.5, 12.5],
+                    label:'Kill Line',
+                    data:[12.5, 13.5, 12.5, 12.5],
                     borderColor:'#dc2626',
-                    backgroundColor:'rgba(220,38,38,0.05)',
-                    fill:true, tension:0, borderWidth:4,
-                    pointBackgroundColor: ctx => (ctx.dataIndex===1 || ctx.dataIndex===3) ? '#dc2626' : '#c9a84c',
-                    pointRadius: 8,
-                    pointBorderColor: '#fff',
-                    pointBorderWidth: 2,
+                    backgroundColor:'transparent',
+                    fill:false, tension:0, borderWidth:4,
+                    pointBackgroundColor: ctx => ctx.dataIndex===2 ? '#c9a84c' : '#dc2626',
+                    pointRadius: ctx => ctx.dataIndex===2 ? 10 : 6,
+                    pointBorderColor: ctx => ctx.dataIndex===2 ? '#fff' : '#dc2626',
+                    pointBorderWidth: ctx => ctx.dataIndex===2 ? 3 : 1,
                 }]
             },
             options:{
                 responsive:true, maintainAspectRatio:false,
-                plugins:{ 
-                    legend:{display:false}, 
-                    tooltip:{backgroundColor:'#1e3a5f', callbacks:{label: c=>' Map 2 Line: '+c.parsed.y}} 
-                },
+                plugins:{ legend:{display:false}, tooltip:{backgroundColor:'#1e3a5f', callbacks:{label: c=>' Kill Line: '+c.parsed.y}} },
                 scales:{
-                    y:{min:10,max:15,grid:{color:'#f1f5f9'},ticks:{color:'#94a3b8'}},
-                    x:{grid:{display:false},ticks:{color:'#94a3b8'}}
+                    y:{min:11,max:15,grid:{color:'#cbd5e1'},ticks:{color:'#334155',font:{weight:'600'}}},
+                    x:{grid:{display:false},ticks:{color:'#334155',font:{weight:'600'}}}
                 }
             }
         });
@@ -621,25 +844,31 @@
         activeCharts.perf = new Chart(ctxP, {
             type:'bar',
             data:{
-                labels:['KDR','KPR','DPR','ADR'],
+                labels:['KDR (K/D)','KPR (K/R)','ADR (Dmg)','DPR (Deaths)'],
                 datasets:[
-                    {label:'Career Avg (PM)', data:[101,69,68,77.8], backgroundColor:'#1e3a5f', borderRadius:10},
-                    {label:'Anomaly Map 2 (CM)', data:[53.3,40,75,57.9], backgroundColor:'#dc2626', borderRadius:10}
+                    {label:'Career Avg (Nuke Baseline)', data:[100,100,100,100], backgroundColor:'#1e3a5f', borderRadius:10},
+                    {label:'Anomaly Map 2 (Nuke)',       data:[53,58,74,110],   backgroundColor:'#dc2626', borderRadius:10}
                 ]
             },
             options:{
                 responsive:true, maintainAspectRatio:false,
                 plugins:{
                     legend:{position:'bottom', labels:{font:{family:'Outfit',size:12,weight:'bold'}}},
-                    tooltip:{backgroundColor:'#1e3a5f', callbacks:{label: ctx=>' '+ctx.dataset.label+': '+ctx.parsed.y}}
+                    tooltip:{backgroundColor:'#1e3a5f', callbacks:{label: ctx=>' '+ctx.dataset.label+': '+ctx.parsed.y+'%'}}
                 },
                 scales:{
-                    y:{min:0,max:120,grid:{color:'#f1f5f9'},ticks:{color:'#94a3b8'}},
-                    x:{grid:{display:false},ticks:{color:'#94a3b8',font:{weight:'bold'}}}
+                    y:{min:0,max:120,grid:{color:'#cbd5e1'},ticks:{color:'#334155',font:{weight:'600'},callback:v=>v+'%'}},
+                    x:{grid:{display:false},ticks:{color:'#334155',font:{weight:'bold'}}}
                 }
             },
             plugins:[baselineLine]
         });
+    }
+
+    function toggleDesc(id, btn) {
+        const el = document.getElementById(id);
+        el.classList.toggle('desc-clamp');
+        btn.textContent = el.classList.contains('desc-clamp') ? 'Read more' : 'Read less';
     }
 
     function navigateToEvidence(target) {
@@ -652,17 +881,20 @@
 
     function toggleSidebar() {
         const sidebar = document.getElementById('sidebar');
-        const showBtn = document.getElementById('sidebar-show-btn');
+        const topbar  = document.getElementById('sidebar-topbar');
         const isHidden = sidebar.style.minWidth === '0px';
         if (isHidden) {
             sidebar.style.minWidth=''; sidebar.style.width='';
             sidebar.style.overflow=''; sidebar.style.opacity='1';
-            showBtn.style.display='none';
+            topbar.style.display='none';
         } else {
             sidebar.style.minWidth='0px'; sidebar.style.width='0px';
             sidebar.style.overflow='hidden'; sidebar.style.opacity='0';
-            showBtn.style.display='block';
+            topbar.style.display='flex';
         }
+        setTimeout(() => {
+            Object.values(activeCharts).forEach(c => { if (c) c.resize(); });
+        }, 320);
     }
 
     window.onload = () => {
